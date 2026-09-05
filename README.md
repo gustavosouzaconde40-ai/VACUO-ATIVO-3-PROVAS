@@ -29,3 +29,10 @@ Arquivo original: `rvm_params_1e1547_15bins.csv` com `phase, q, q_err, u, u_err`
 
 ```bash
 python likelihood/AV_likelihood.py
+## Theory - Z0 como unidade
+
+Ver `theory/Z0_as_unit.md` e `theory/dimensional_analysis.py`
+
+- Z0 = 376.73 Ohm definido como Z0=1 no sistema AV
+- rho_Lambda = M_Pl^4 * exp(-S_inst(Z0)), S_inst~280 -> 1e-47 GeV4
+- Previsão falsificável: Delta chi2 -> >9 com IXPE 500h se M = f(Z0)
