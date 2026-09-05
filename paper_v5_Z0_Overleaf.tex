@@ -1,0 +1,143 @@
+% VACUO-ATIVO-5-PROVAS v5.0 - Overleaf LaTeX
+% Gustavo Alves Conde - ORCID 0009-0003-8264-7907 - Zenodo 10.5281/zenodo.22307797
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb,physics,graphicx,hyperref,booktabs,xcolor}
+\usepackage{geometry}
+\geometry{margin=2cm}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\title{VACUO-ATIVO-5-PROVAS: Z0 como unidade \\ $k=8.45\;\Omega$, $S_{\rm inst}=280$, $N_{\rm inst}=22$ e teste IXPE 1E 1547.0-5408}
+\author{Gustavo Alves Conde\\ ORCID 0009-0003-8264-7907\\ Colatina-ES, Brasil\\ \texttt{gustavosouzaconde40-ai/VACUO-ATIVO-5-PROVAS}}
+\date{v5.0 PROOF - 2026-05-13 10:15 UTC - Zenodo 10.5281/zenodo.22307797}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Apresentamos o fechamento do ciclo metodológico v5.0 com 5 provas convergentes para o vácuo ativo onde $Z_0=\sqrt{\mu_0/\epsilon_0}=376.730313668\;\Omega\equiv 1$ é tomado como unidade. Derivamos $k=2\pi Z_0/S_{\rm inst}=8.45\;\Omega$ com $S_{\rm inst}=280$, $N_{\rm inst}=S/(4\pi)=22$, $R_K/k=3053.6$, $\rho_\Lambda=M_{\rm Pl}^4 e^{-S}=10^{-47}\;{\rm GeV^4}$. A Prova 2 (IXPE magnetar 1E 1547.0-5408, 15 bins) dá PD weighted mean $0.556$, $\chi^2_{\rm QED}=18.12/14=1.29$, $\Delta\chi^2=6.46$ (LIMITE $M>{\rm few}$ TeV) com forecast $23.0$ para 500h (3$\sigma$). Provas 1 (JWST CEERS), 3 (LZ), 4 (Z0 unidade) e 5 (forecast falsificável) completam o conjunto falsificável.
+\end{abstract}
+
+\section{Derivação central v5.0}
+\begin{align}
+Z_0 &= \sqrt{\mu_0/\epsilon_0}=\mu_0 c = 376.730313668\;\Omega \equiv 1 \\
+S_{\rm inst} &= 280 \implies e^{-S}=10^{-121.6}\\
+\rho_\Lambda &= M_{\rm Pl}^4 e^{-S} = (2.4\times10^{18}{\rm GeV})^4 10^{-121.6}=10^{-47}{\rm GeV^4}\\
+k &= \frac{2\pi Z_0}{S}= \frac{2\pi\times376.73}{280}=8.45\;\Omega\\
+\frac{S}{2\pi}&=44.56\;{\rm enrolamentos},\quad N_{\rm inst}=S/(4\pi)=22.29\sim22\;(24-2\;{\rm corda})\\
+R_K &= h/e^2=25812.8\;\Omega \implies R_K/k=3053.6
+\end{align}
+
+\section{5 Provas Convergentes}
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Prova & Fonte & Observável & Atual 140h & Previsão 500h \\ \midrule
+1 JWST & CEERS $z>10$ & $\lambda/M_{\rm Pl}\sim(Z_0/Z_{\rm Pl})^n e^{-S/4}$ & consistente & mesmo $Z_0$\\
+2 IXPE & 1E 1547 15 bins & PD=0.556, $\chi^2=18.12/14$, $\Delta=6.46$ & LIMITE & $\Delta=23.0>9$\\
+3 LZ & LZ 2024 & $\xi\sim Z_0$ & limite $\xi$ & mesmo $Z_0$\\
+4 Z0 unit & $Z0k845\_derivation.md$ & $k=8.45\;\Omega$, $S=280$, $N=22$ & derivado & falsificável\\
+5 Forecast & $teoria\_Z0\_sensibilidade.png$ & $\Delta\chi^2$ vs $t$ & 6.46@140h & 23.0@500h $>9$\\ \bottomrule
+\end{tabular}
+\caption{5 provas v5.0. Código \texttt{AV\_likelihood.py} usa \texttt{rvm\_params\_1e1547\_15bins.csv}.}
+\end{table}
+
+\section{Prova 2 - Magnetar 1E 1547.0-5408 (IXPE)}
+Dados fase-resolvidos $q=Q/I$, $u=U/I$, $q_{\rm err}$, $u_{\rm err}$ (15 bins). PD calculado como $\sqrt{q^2+u^2}$. Código atual:
+\begin{verbatim}
+df = pd.read_csv('rvm_params_1e1547_15bins.csv')
+# PD = sqrt(q^2+u^2) se PD não estiver no CSV
+phi = df['phase'].values
+PD = sqrt(q^2+u^2)
+PD_err from propagation
+PD_mean = weighted mean = 0.556
+chi2_qed = sum((PD-PD_mean)/PD_err)^2 = 18.12 /14 dof=1.29
+pd_av_model = pd0 + c1*sin(2pi*phi)
+Delta = chi2_qed - chi2_av = 6.46 -> LIMITE M>few TeV
+if Delta<9: LIMITE else HINT
+\end{verbatim}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{1E1547_phase_PD_2-3keV.png}
+\caption{1E 1547 phase-resolved PD 2-3 keV. QED constant PD=0.556 (dashed), AV best amp=-0.143 (red), IXPE data 2026. $\chi^2=18.12/14=1.29$.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{Stokes_QU_15bins.png}
+\caption{Stokes Q-U plane 15 bins. Circularidade teste de birrefringência AV.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{likelihood_scan_Delta6p46.png}
+\caption{Likelihood scan $\chi^2_{\rm AV}-\chi^2_{\rm QED}$ vs amplitude A. $\Delta=6.46<9$ LIMITE, forecast 500h $\Delta=23.0>9$ DISCOVERY se Z0.}
+\end{figure}
+
+\section{Provas 3-4 - WHIM, VIEC-FEMP e Z0-Probe}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{fb_WHIM_Delta_xi.png}
+\caption{Esq: $f_b=M_b/M_{\rm tot}$ vs overdensity WHIM. Dir: $\Delta\chi^2$ vs $\xi$ acoplamento não-mínimo. Prova 3/4.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{VIEC_FEMP_haloscopio.png}
+\caption{VIEC-FEMP Haloscópio massa [ueV] vs $\tau$ [mm] slot 3T 8T 13T. Teste laboratório $k=8.45\;\Omega$.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{Z0_Probe_sensibilidade.png}
+\caption{Z0-Probe $|\Delta Z_0/Z_0|$ vs B[T] M=1e-06, 0.001, 1, 1000 TeV + sens AI 6061 3e-6. Prova 4/5 falsificável.}
+\end{figure}
+
+\section{Como rodar v5.0}
+\begin{verbatim}
+python likelihood/AV_likelihood.py
+# PD weighted mean = 0.556
+# chi2 QED (const) = 18.12 /14 dof=1.29
+# Delta chi2 = 6.46 -> LIMITE
+
+python teoria/AV_Z0_Sonda_sensibilidade.py
+# gera teoria/teoria_Z0_sensibilidade.png Forecast 500h Delta 23.0
+
+python teoria/análise_dimensional.py
+# rho_Lambda = M_Pl^4 * exp(-2*pi*Z0/k)
+\end{verbatim}
+
+Estrutura v5.0 10:15 UTC:
+\begin{verbatim}
+VACUO-ATIVO-5-PROVAS/
+  dados/rvm_params_1e1547_15bins.csv (q,u,PA, 15 bins, PD=sqrt(q^2+u^2))
+  probabilidade/ ou likelihood/AV_likelihood.py (Delta=6.46)
+  teoria/ (12 arquivos após upload)
+    AV_Z0_Sonda_sensibilidade.py
+    Z0_Proof_Closure.md
+    Z0_como_unidade.md
+    Z0k845_derivation.md (k=8.45 Ohm, N_inst=22)
+    análise_dimensional.py
+    teoria_Z0_sensibilidade.png
+    1E1547_phase_PD_2-3keV.png
+    Stokes_QU_15bins.png
+    likelihood_scan_Delta6p46.png
+    fb_WHIM_Delta_xi.png
+    VIEC_FEMP_haloscopio.png
+    Z0_Probe_sensibilidade.png
+  joss/paper.md (este artigo em markdown)
+  VACUO-ATIVO-3-PROVAS.zip (histórico)
+\end{verbatim}
+
+\section{Falsificabilidade}
+Se IXPE 500h não der $\Delta>9$, então $k\neq8.45$ ou $N_{\rm inst}\neq22$ $\implies$ Z0-unit refutado. Isso crava Z0 como hipótese científica, não numerologia. Zenodo vs GitHub: GitHub=código+CSV+teoria+PNG v5.0, Zenodo 22307797 v5.0 arquiva GitHub automaticamente. PDFs e ZIPs somente Zenodo: New version upload.
+
+\section{Conclusão}
+Ciclo metodológico fechado, comprovação aberta. 5 provas, 6 gráficos, PD=0.556, $\chi^2=18.12/14$, $\Delta=6.46$ LIMITE, previsão 23.0.
+
+\textbf{ORCID: 0009-0003-8264-7907 - Colatina-ES, 2026-05-13 10:15 UTC}
+
+\end{document}
