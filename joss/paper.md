@@ -1,13 +1,9 @@
 ---
 title: 'AETERNVM VACUVM v6.0.2 Z0 Unit PeVatron 6th Proof'
-tags: [cosmology, vacuum-impedance, IXPE, PeVatron, LHAASO]
+tags: [cosmology]
 authors:
     - name: Gustavo Alves Conde
     orcid: '0009-0003-8264-7907'
-    affiliation: 1
-affiliations:
-    - name: Independent Researcher, Colatina-ES, Brazil
-    index: 1
 date: 2026-05-15
 bibliography: paper.bib
 ---
@@ -29,8 +25,8 @@ k = 2pi*Z0 / S_inst = 8.45 Ohm. N_inst = S_inst/(2pi*2)=22.29~22. tau_AV=0.81*(Z
 # Data Availability
 
 Stewart et al. GitHub: https://github.com/rae-stewart/Polarimetric-Analysis-of-1E-1547.0-5408
-This repo: data/rvm_params_1e1547_15bins.csv, probabilidade/AV_likelihood.py scaling=(hours_target/hours_current)**0.5 =12.21, probabilidade/AV_PeV_transparencia.py tau_AV=0.81
+This repo: data/rvm_params_1e1547_15bins.csv, probabilidade/AV_likelihood.py scaling=(hours_target/hours_current)**0.5 =12.21
 
 # References
 
-Stewart et al. (2026) Nature 656, 590-594. Cao et al. 2025b LHAASO Cygnus X-3 PeVatron 3.73 PeV.
+Stewart et al. (2026) Nature 656. Cao et al. 2025b LHAASO 3.73 PeV.
