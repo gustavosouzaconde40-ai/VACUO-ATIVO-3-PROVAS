@@ -1,9 +1,7 @@
 ---
 title: 'AETERNVM VACUVM v6.0.2 Z0 Unit PeVatron 6th Proof'
 tags: [cosmology]
-authors:
-    - name: Gustavo Alves Conde
-    orcid: '0009-0003-8264-7907'
+authors: [{name: 'Gustavo Alves Conde', orcid: '0009-0003-8264-7907'}]
 date: 2026-05-15
 bibliography: paper.bib
 ---
@@ -25,7 +23,7 @@ k = 2pi*Z0 / S_inst = 8.45 Ohm. N_inst = S_inst/(2pi*2)=22.29~22. tau_AV=0.81*(Z
 # Data Availability
 
 Stewart et al. GitHub: https://github.com/rae-stewart/Polarimetric-Analysis-of-1E-1547.0-5408
-This repo: data/rvm_params_1e1547_15bins.csv, probabilidade/AV_likelihood.py scaling=(hours_target/hours_current)**0.5 =12.21
+This repo: data/rvm_params_1e1547_15bins.csv
 
 # References
 
