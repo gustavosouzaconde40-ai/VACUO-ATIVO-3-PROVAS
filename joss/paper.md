@@ -1,9 +1,14 @@
 ---
 title: 'AETERNVM VACUVM v6.0.2 Z0 Unit PeVatron 6th Proof'
-tags: [cosmology, vacuum-impedance, IXPE, PeVatron]
+tags: [cosmology, vacuum-impedance, IXPE, PeVatron, LHAASO]
 authors:
     - name: Gustavo Alves Conde
-date: 2026-05-14
+    orcid: '0009-0003-8264-7907'
+    affiliation: 1
+affiliations:
+    - name: Independent Researcher, Colatina-ES, Brazil
+    index: 1
+date: 2026-05-15
 bibliography: paper.bib
 ---
 
